@@ -1,6 +1,6 @@
 <?php
 
-require 'includes/database.php';
+require 'includes/Database.php';
 require 'includes/auth.php';
 
 session_start();
