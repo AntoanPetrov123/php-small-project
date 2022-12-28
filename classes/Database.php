@@ -1,9 +1,9 @@
 <?php
-  /**
-   * Database
-   * 
-   * A connection to the database
-   */
+/**
+ * Database
+ * 
+ * A connection to the database
+ */
 
 class Database
 {
@@ -21,7 +21,15 @@ class Database
 
         //conncet database with PDO
         $dsn = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
+        try {
+            $db = new PDO($dsn, $db_user, $db_pass);
 
-        return new PDO($dsn, $db_user, $db_pass);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            return $db;
+        } catch (PDOException $err) {
+            echo $err->getMessage();
+            exit;
+        }
     }
 }
