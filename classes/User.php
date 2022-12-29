@@ -5,14 +5,39 @@
 class User
 {
     /**
+     * Unique id
+     * @var integer
+     * Unique username
+     * @var string
+     * Password
+     * @var string
+     */
+    public $id;
+    public $username;
+    public $password;
+
+    /**
      * Summary of authenticate
      * @param string $username Username
      * @param string $password Password
      * 
-     * @return boolean True if the credentials are correct, false otherwise
+     * @return mixed True if the credentials are correct, null otherwise
      */
-    public static function authenticate($username, $password)
+    public static function authenticate($username, $password, $conn)
     {
-        return $username == 'antoan' && $password == 'secret';
+        $sql = "SELECT *
+                FROM user
+                WHERE username = :username";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $stmt->execute();
+
+
+        if ($user = $stmt->fetch()) {
+            return $user->password == $password;
+        }
     }
 }
