@@ -1,6 +1,6 @@
 <?php
 
-require 'includes/url.php';
+require 'classes/Url.php';
 
 session_start();
 
@@ -9,7 +9,9 @@ $_SESSION = [];
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
 
-    setcookie(session_name(), '', time() - 42000,
+    setcookie(
+        session_name(),
+        '', time() - 42000,
         $params["path"], $params["domain"],
         $params["secure"], $params["httponly"]
     );
@@ -17,4 +19,4 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-redirect('/');
+Url::redirect('/');
