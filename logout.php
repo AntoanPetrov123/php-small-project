@@ -1,8 +1,6 @@
 <?php
 
-require 'classes/Url.php';
-
-session_start();
+require 'icludes/init.php';
 
 $_SESSION = [];
 

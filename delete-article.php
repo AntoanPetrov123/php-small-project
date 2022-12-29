@@ -1,8 +1,6 @@
 <?php
 
-require 'classes/Database.php';
-require 'classes/Article.php';
-require 'classes/Url.php';
+require 'icludes/init.php';
 
 $db = new Database();
 $conn = $db->getConn();
