@@ -1,11 +1,10 @@
 <?php
 
-require 'icludes/init.php';
+require 'includes/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $db = new Database();
-    $conn = $db->getConn();
+    $conn = require 'includes/db.php';
 
     if (User::authenticate($_POST['username'], $_POST['password'], $conn)) {
         session_regenerate_id(true);

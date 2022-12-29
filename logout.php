@@ -1,6 +1,6 @@
 <?php
 
-require 'icludes/init.php';
+require 'includes/init.php';
 
 $_SESSION = [];
 
