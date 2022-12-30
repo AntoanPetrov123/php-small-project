@@ -4,7 +4,12 @@ require 'includes/init.php';
 
 $conn = require 'includes/db.php';
 
-$articles = Article::getAll($conn);
+//this is equal
+// $paginator = new Paginator(isset($_GET['page']) ? $_GET['page'] : 1, 4);
+//to this
+$paginator = new Paginator($_GET['page'] ?? 1, 4, Article::getTotal($conn));
+
+$articles = Article::getPage($paginator->limit, $paginator->offset, $conn);
 
 ?>
 <?php require 'includes/header.php'; ?>
@@ -23,6 +28,8 @@ $articles = Article::getAll($conn);
     </li>
     <?php endforeach; ?>
 </ul>
+
+<?php require 'includes/pagination.php'; ?>
 
 <?php endif; ?>
 
